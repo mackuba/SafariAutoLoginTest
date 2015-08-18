@@ -1,0 +1,34 @@
+<head>
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+<script>
+
+var c = document.cookie;
+var m = c.match(/name=(\w+)/);
+var name;
+
+if (m) {
+  document.writeln("You are " + m[1] + '.');
+  name = m[1];
+} else {
+  document.writeln("You are anonymous.");
+  name = "";
+}
+
+if (location.search.match(/redirect/)) {
+  location.href = "svclogintest://name/" + name;
+}
+
+function saveName() {
+    document.cookie = 'name=' + document.getElementById('name').value + ';max-age=3600';
+    location.reload();
+}
+
+</script>
+
+<input type="text" id="name">
+<input type="submit" value="Save" onclick="saveName();">
+
+</body>
