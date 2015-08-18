@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		585208A51B837F4F00655137 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		588167CA1B83675600D09220 /* SafariAutoLoginTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SafariAutoLoginTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		588167CD1B83675600D09220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		588167CF1B83675600D09220 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 				588167D61B83675600D09220 /* LaunchScreen.storyboard */,
 				588167D11B83675600D09220 /* Main.storyboard */,
 				588167CF1B83675600D09220 /* ViewController.swift */,
+				585208A51B837F4F00655137 /* README.md */,
 			);
 			path = SafariAutoLoginTest;
 			sourceTree = "<group>";
@@ -285,6 +287,7 @@
 				588167DE1B83675600D09220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
