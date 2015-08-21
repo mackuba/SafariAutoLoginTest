@@ -9,7 +9,7 @@ This project was inspired by [this article by LaunchKit](https://library.launchk
 
 Here's how it looks:
 
-<a href="https://s3.amazonaws.com/f.cl.ly/items/1p3p1E3S0c1W3H19263G/safari_autologin.mp4"><img src="http://f.cl.ly/items/2F1y0Y3v0C0U401m0i0C/safari_autologin.png" width="600" alt="video"></a>
+<a href="https://vimeo.com/136968596"><img src="http://f.cl.ly/items/2F1y0Y3v0C0U401m0i0C/safari_autologin.png" width="600" alt="video"></a>
 
 
 ## How it's done
