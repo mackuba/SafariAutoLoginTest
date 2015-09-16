@@ -44,6 +44,7 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
     }
 
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(false, completion: nil)
         self.safari = nil
     }
 
@@ -53,6 +54,9 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
                 nameLabel.text = "You are \(name)!"
             } else {
                 nameLabel.text = "I don't know who you are :("
+            }
+            if let safari = self.safari {
+                safariViewControllerDidFinish(safari)
             }
         }
     }
