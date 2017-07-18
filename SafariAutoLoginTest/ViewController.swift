@@ -12,8 +12,10 @@ import SafariServices
 class ViewController: UIViewController, SFSafariViewControllerDelegate {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var authenticateButton: UIButton!
 
     var safari: SFSafariViewController?
+    var authSession: NSObject?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,10 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
         safari.view.alpha = 0.05
 
         self.safari = safari
+
+        if #available(iOS 11.0, *) {
+            authenticateButton.isEnabled = true
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -56,6 +62,22 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
             } else {
                 nameLabel.text = "I don't know who you are :("
             }
+        }
+    }
+
+    @IBAction func authenticateButtonPressed() {
+        if #available(iOS 11.0, *) {
+            let url = URL(string: "http://localhost:8000/?redirect")!
+            let session = SFAuthenticationSession(url: url, callbackURLScheme: "svclogintest") { (url, error) in
+                print("url = \(String(describing: url))")
+                print("error = \(String(describing: error))")
+
+                if let url = url {
+                    URLHandler().handleURL(url: url)
+                }
+            }
+            session.start()
+            self.authSession = session
         }
     }
 }

@@ -26,14 +26,24 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nP-Uf-nmx">
+                                <rect key="frame" x="143" y="394" width="88" height="30"/>
+                                <state key="normal" title="Authenticate"/>
+                                <connections>
+                                    <action selector="authenticateButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="y5I-nm-dVF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="9nP-Uf-nmx" firstAttribute="top" secondItem="CAA-KY-8jK" secondAttribute="bottom" constant="50" id="0cc-VI-Y6k"/>
                             <constraint firstItem="CAA-KY-8jK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Wg0-j8-b7g"/>
                             <constraint firstItem="CAA-KY-8jK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XnE-kq-mg2"/>
+                            <constraint firstItem="9nP-Uf-nmx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="u33-uF-ara"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="authenticateButton" destination="9nP-Uf-nmx" id="wGc-DH-dAO"/>
                         <outlet property="nameLabel" destination="CAA-KY-8jK" id="amf-dI-k2J"/>
                     </connections>
                 </viewController>
