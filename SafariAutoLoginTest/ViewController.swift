@@ -18,37 +18,39 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "nameLinkReceived:",
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(nameLinkReceived),
             name: NameLinkReceivedNotification,
-            object: nil)
+            object: nil
+        )
 
-        let safari = SFSafariViewController(URL: NSURL(string: "http://localhost:8000/?redirect")!)
+        let safari = SFSafariViewController(url: URL(string: "http://localhost:8000/?redirect")!)
         safari.delegate = self
-        safari.modalPresentationStyle = .OverCurrentContext
+        safari.modalPresentationStyle = .overCurrentContext
         safari.view.alpha = 0.0
 
         self.safari = safari
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if let safari = safari {
-            presentViewController(safari, animated: false, completion: nil)
+            present(safari, animated: false, completion: nil)
         }
     }
 
-    func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
-        dismissViewControllerAnimated(false, completion: nil)
+    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+        dismiss(animated: false, completion: nil)
     }
 
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         self.safari = nil
     }
 
-    func nameLinkReceived(notification: NSNotification) {
-        if let info = notification.userInfo, name = info["name"] as? String {
+    func nameLinkReceived(_ notification: Notification) {
+        if let info = notification.userInfo, let name = info["name"] as? String {
             if !name.isEmpty {
                 nameLabel.text = "You are \(name)!"
             } else {

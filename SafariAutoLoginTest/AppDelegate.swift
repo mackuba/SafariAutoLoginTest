@@ -8,20 +8,21 @@
 
 import UIKit
 
-let NameLinkReceivedNotification = "NameLinkReceivedNotification"
+let NameLinkReceivedNotification = Notification.Name("NameLinkReceivedNotification")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         if url.host == "name" {
-            let path = url.path! as NSString
+            let path = url.path as NSString
 
-            NSNotificationCenter.defaultCenter().postNotificationName(NameLinkReceivedNotification,
+            NotificationCenter.default.post(
+                name: NameLinkReceivedNotification,
                 object: self,
-                userInfo: ["name": path.substringFromIndex(1)]
+                userInfo: ["name": path.substring(from: 1)]
             )
         }
 
