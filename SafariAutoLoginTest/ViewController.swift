@@ -55,7 +55,7 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
         self.safari = nil
     }
 
-    func nameLinkReceived(_ notification: Notification) {
+    @objc func nameLinkReceived(_ notification: Notification) {
         if let info = notification.userInfo, let name = info["name"] as? String {
             if !name.isEmpty {
                 nameLabel.text = "You are \(name)!"
