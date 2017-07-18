@@ -68,7 +68,7 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
     @IBAction func authenticateButtonPressed() {
         if #available(iOS 11.0, *) {
             let url = URL(string: "http://localhost:8000/?redirect")!
-            let session = SFAuthenticationSession(url: url, callbackURLScheme: "svclogintest") { (url, error) in
+            let session = SFAuthenticationSession(url: url, callbackURLScheme: nil) { (url, error) in
                 print("url = \(String(describing: url))")
                 print("error = \(String(describing: error))")
 

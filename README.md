@@ -49,6 +49,7 @@ For the new 2017 version using `SFAuthenticationSession`:
 
 - the app creates an `SFAuthenticationSession` and saves it in an instance variable (otherwise the popup disappears immediately)
 - it tells is to load exactly the same URL as in SVC and launches it by calling `start()`
+  * anyone knows how to change the "(null)" in the message that's shown in the popup? or what the `callbackURLScheme` is for, since it seems to work just fine regardless what you put there?
 - if authentication succeeds, you get a URL which you can handle the same way as in `application(handleOpenURL:)`, if not, you get an error object
 
 
