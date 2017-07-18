@@ -28,7 +28,7 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
         let safari = SFSafariViewController(url: URL(string: "http://localhost:8000/?redirect")!)
         safari.delegate = self
         safari.modalPresentationStyle = .overCurrentContext
-        safari.view.alpha = 0.0
+        safari.view.alpha = 0.05
 
         self.safari = safari
     }
