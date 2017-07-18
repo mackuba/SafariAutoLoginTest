@@ -6,7 +6,7 @@ This project was inspired by [this article by LaunchKit](https://library.launchk
 
 **== UPDATE 2017 ==**
 
-This doesn't work anymore - some people of course had to use it for evil purposes (surprise surprise) and Apple has changed a few things:
+The original approach doesn't work anymore - some people of course had to use it for evil purposes (surprise surprise) and Apple has changed a few things:
 
 - the [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) (5.1.1) now specifically say that:
 
@@ -14,6 +14,14 @@ This doesn't work anymore - some people of course had to use it for evil purpose
 
 - since iOS 10, SafariViewController doesn't seem to load at all when alpha is set to 0
 - since iOS 11, SafariViewController uses a separate cookie storage from Safari, so even if you manage to make it load, it won't recognize you
+
+Possible alternatives:
+
+- [Shared Web Credentials](https://developer.apple.com/documentation/security/shared_web_credentials) (if the user uses iCloud Keychain)
+- [SFAuthenticationSession](https://developer.apple.com/documentation/safariservices/sfauthenticationsession), a new API added in iOS 11 beta 3 (also supports e.g. 1Password, but loses some of the "magic" of automatically recognizing the user)
+- one popular third party service that uses fingerprinting and other shady techniques, but please don't use that 🙏
+
+I've added support for `SFAuthenticationSession` in the app - you can launch it by tapping the "Authenticate" button. It's actually pretty nice and the result is very similar to the old approach, except you get a popup first where you have to confirm access and then you see the SVC slide up and down.
 
 ## See it in action
 
@@ -36,6 +44,12 @@ It's actually pretty simple:
 - when the view controller receives the notification from the delegate, it updates the label in the center with the user's name
 
 So this way you can remember the user between app installations and even before it's installed for the first time, as long as you control the site which sets the cookies and can make it redirect to the custom URL, and as long as the user doesn't clear the cookies in Safari. (I've seen an issue though where even after clearing the cookies the SVC was still seeing them, even though Safari didn't - might be a bug in the beta?)
+
+For the new 2017 version using `SFAuthenticationSession`:
+
+- the app creates an `SFAuthenticationSession` and saves it in an instance variable (otherwise the popup disappears immediately)
+- it tells is to load exactly the same URL as in SVC and launches it by calling `start()`
+- if authentication succeeds, you get a URL which you can handle the same way as in `application(handleOpenURL:)`, if not, you get an error object
 
 
 ## How to test it
