@@ -4,6 +4,16 @@ This demo shows how you can automatically log in users to your iOS app after the
 
 This project was inspired by [this article by LaunchKit](https://library.launchkit.io/how-ios-9-s-safari-view-controller-could-completely-change-your-app-s-onboarding-experience-2bcf2305137f).
 
+**== UPDATE 2017 ==**
+
+This doesn't work anymore - some people of course had to use it for evil purposes (surprise surprise) and Apple has changed a few things:
+
+- the [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) (5.1.1) now specifically say that:
+
+  > SafariViewContoller must be used to visibly present information to users; the controller may not be hidden or obscured by other views or layers. Additionally, an app may not use SafariViewController to track users without their knowledge and consent.
+
+- since iOS 10, SafariViewController doesn't seem to load at all when alpha is set to 0
+- since iOS 11, SafariViewController uses a separate cookie storage from Safari, so even if you manage to make it load, it won't recognize you
 
 ## See it in action
 
@@ -16,10 +26,12 @@ Here's how it looks:
 
 It's actually pretty simple:
 
-- the app creates an `SFSafariViewController` at startup and tells it to load a special page in your webapp that automatically redirects back to your app using a custom URL scheme (that's the only way you can pass something back to your app, since the app has no direct access to the contents of the Safari View Controller)
+- the app creates an `SFSafariViewController` at startup and tells it to load a special page in your webapp that automatically redirects back to your app using a custom URL scheme (you can only pass something back to your app with a redirect, since the app has no direct access to the contents of the Safari View Controller)
 - the main view controller presents the Safari View Controller as a popup (it needs to be displayed to start loading the page), but to hide the Safari View Controller from the user, it sets its `modalPresentationStyle` to `.OverCurrentContext` and its view's `alpha` to 0
-  * let me know if you know a better way to do this :)
+  * update: alpha now needs to be [at least 0.05](https://github.com/mackuba/SafariAutoLoginTest/issues/6)
+  * you might also be able to get it to work with a [second UIWindow](https://github.com/mackuba/SafariAutoLoginTest/issues/5)
 - the page reads the name from the previously set cookie and redirects to `svclogintest://name/yournamehere`; that triggers the callback `application(handleOpenURL:)` in the application delegate, which notifies the view controller about it through an `NSNotification`
+  * you could also use [universal app links](https://github.com/mackuba/SafariAutoLoginTest/issues/3) for this, which would avoid a possible issue with some other app using the same URL scheme as yours, accidentally or on purpose
 - when the page finishes loading, the view controller automatically cleans up the SVC
 - when the view controller receives the notification from the delegate, it updates the label in the center with the user's name
 
